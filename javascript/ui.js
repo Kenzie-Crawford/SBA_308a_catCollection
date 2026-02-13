@@ -14,12 +14,15 @@ export function renderGallery(images) {
   gallery.innerHTML = "";
 
   images.forEach(image => {
-    const card = document.createElement("div");
-    card.innerHTML = `
-      <img src="${image.url}" width="200"/>
-      <button data-id="${image.id}">❤️ Favorite</button>
+    const col = document.createElement("div");
+    col.classname = "col-md-4 col-lg-3"
+    col.innerHTML = `
+    <div class = "card shadow-sm h-100">
+      <img src="${image.url}" class="card-img-top" alt="Cat">
+      <div class="card-body text-center">
+      <button class="btn btn-danger w-100" data-id="${image.id}">
     `;
-    gallery.appendChild(card);
+    gallery.appendChild(col);
   });
 }
 
