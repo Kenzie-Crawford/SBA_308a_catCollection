@@ -59,34 +59,43 @@ document.getElementById("gallery")
     });
 
 document.getElementById("loadMoreBtn")
-  .addEventListener("click", async (event) => {
+    .addEventListener("click", async (event) => {
 
-    const button = event.target;
-    button.disabled = true;
+        const button = event.target;
+        button.disabled = true;
 
-    try {
-        const breedId = document.getElementById("breedSelect").value;
-        currentPage++;
+        try {
+            const breedId = document.getElementById("breedSelect").value;
+            currentPage++;
 
-        const cats = await searchCats(breedId, currentPage);
+            const cats = await searchCats(breedId, currentPage);
 
-        const gallery = document.getElementById("gallery");
+            const gallery = document.getElementById("gallery");
 
-        cats.forEach(cat => {
-            const card = document.createElement("div");
-            card.innerHTML = `
-              <img src="${cat.url}" width="200"/>
-              <button data-id="${cat.id}">❤️ Favorite</button>
-            `;
-            gallery.appendChild(card);
-        });
+            cats.forEach(image => {
+                const col = document.createElement("div");
+                col.className = "col-md-4 col-lg-3";
 
-    } catch (error) {
-        console.error("Load more error:", error);
-    }
+                col.innerHTML = `
+      <div class="card shadow-sm h-100">
+        <img src="${image.url}" class="card-img-top" alt="Cat">
+        <div class="card-body text-center">
+          <button class="btn btn-danger w-100" data-id="${image.id}">
+            ❤️ Favorite
+          </button>
+        </div>
+      </div>
+    `;
 
-    button.disabled = false;
-});
+                gallery.appendChild(col);
+            });
+
+        } catch (error) {
+            console.error("Load more error:", error);
+        }
+
+        button.disabled = false;
+    });
 
 document.getElementById("favorites")
     .addEventListener("click", async (event) => {
