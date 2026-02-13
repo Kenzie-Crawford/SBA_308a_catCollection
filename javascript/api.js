@@ -13,10 +13,11 @@ export async function getBreeds() {
   return response.data;
 }
 
-export async function searchCats(breedId) {
+export async function searchCats(breedId, page = 0) {
   const response = await api.get("/images/search", {
     params: {
       limit: 8,
+      page: page,
       breed_ids: breedId
     }
   });
